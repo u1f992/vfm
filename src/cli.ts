@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import fs from 'fs';
-import meow from 'meow';
+import { default as meow, Result } from 'meow';
 import readline from 'readline';
 import { stringify } from './index.js';
 
@@ -24,6 +24,7 @@ const cli = meow(
       $ vfm input.md
 `,
   {
+    importMeta: import.meta,
     flags: {
       style: {
         type: 'string',
@@ -69,7 +70,7 @@ function compile(input: string) {
 }
 
 function main(
-  cli: meow.Result<{
+  cli: Result<{
     style: { type: 'string'; alias: string };
     partial: { type: 'boolean'; alias: string };
     title: { type: 'string' };
